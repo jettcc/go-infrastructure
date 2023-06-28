@@ -11,20 +11,36 @@ import (
 type response model.SystemJsonResponse
 type result model.SystemResponseResult
 
+/********************** common **********************/
+
 func NewResponse(c *gin.Context) *response {
 	return &response{Ctx: c}
 }
 
-func (s *response) Success(data interface{}) {
-	r := &result{}
-	r.buildResult(constant.SUCCESS, data)
-	s.Ctx.JSON(http.StatusOK, r)
+/********************** success **********************/
+
+func (s *response) Success(code *constant.MsgCode, data interface{}) {
+	if code == nil {
+		code = &constant.SUCCESS
+	}
+	s.Ctx.JSON(http.StatusOK, build(*code, data))
 }
 
-func (s *response) Fail() {
+/********************** fail **********************/
+
+func (s *response) Fail(code *constant.MsgCode, data interface{}) {
+	if code == nil {
+		code = &constant.COMMON_FAIL
+	}
+	s.Ctx.JSON(http.StatusOK, build(*code, data))
+}
+
+/********************** private **********************/
+
+func build(code constant.MsgCode, data interface{}) *result {
 	r := &result{}
-	r.buildResult(constant.COMMON_FAIL, nil)
-	s.Ctx.JSON(http.StatusOK, r)
+	r.buildResult(code, data)
+	return r
 }
 
 func (r *result) buildResult(code constant.MsgCode, data interface{}) {
