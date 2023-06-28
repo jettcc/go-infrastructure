@@ -1,11 +1,11 @@
 package web
 
 import (
-	"go-infrastructure/web/constant"
-	"go-infrastructure/web/model"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/wh1teNight/go-infrastructure/web/constant"
+	"github.com/wh1teNight/go-infrastructure/web/model"
 )
 
 type response model.SystemJsonResponse
