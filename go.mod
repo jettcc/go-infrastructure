@@ -1,8 +1,11 @@
-module github.com/wh1teNight/go-infrastructure
+module github.com/sparksq/go-infrastructure
 
 go 1.18
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/gin-gonic/gin v1.9.1
+	github.com/wh1teNight/go-infrastructure v0.1.2
+)
 
 require (
 	github.com/bytedance/sonic v1.9.1 // indirect
